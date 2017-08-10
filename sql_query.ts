@@ -48,7 +48,7 @@ export default class SqlQuery {
         this.target.rawQuery = query
                     .replace(/\$timeSeries/g, '(intDiv(toUInt32($dateTimeCol), $interval) * $interval) * 1000')
                     .replace(/\$timeFilter/g, timeFilter)
-                    .replace(/\$table/g, this.target.database + '.' + this.target.table)
+                    .replace(/\$table/g, this.templateSrv.replace(this.target.database, options.scopedVars) + '.' + this.target.table)
                     .replace(/\$from/g, from)
                     .replace(/\$to/g, to)
                     .replace(/\$timeCol/g, this.target.dateColDataType)
