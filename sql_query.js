@@ -29,7 +29,7 @@ System.register(["lodash", "app/core/utils/datemath", "moment", "./scanner"], fu
                     target.resultFormat = 'time_series';
                 }
                 SqlQuery.prototype.replace = function (options) {
-                    var query = this.target.query, scanner = new scanner_1.default(query), from = SqlQuery.convertTimestamp(SqlQuery.round(this.options.range.from, this.target.round)), to = SqlQuery.convertTimestamp(this.options.range.to), timeFilter = SqlQuery.getTimeFilter(this.options.rangeRaw.to === 'now'), i = this.templateSrv.replace(this.target.interval, options.scopedVars) || options.interval, interval = SqlQuery.convertInterval(i, this.target.intervalFactor || 1);
+                    var query = this.target.query, ds_name = options['ds_name'] || 'default', scanner = new scanner_1.default(query), from = SqlQuery.convertTimestamp(SqlQuery.round(this.options.range.from, this.target.round)), to = SqlQuery.convertTimestamp(this.options.range.to), timeFilter = SqlQuery.getTimeFilter(this.options.rangeRaw.to === 'now'), i = this.templateSrv.replace(this.target.interval, options.scopedVars) || options.interval, interval = SqlQuery.convertInterval(i, this.target.intervalFactor || 1);
                     try {
                         var ast = scanner.toAST();
                         if (ast.hasOwnProperty('$columns') && !lodash_1.default.isEmpty(ast.$columns)) {

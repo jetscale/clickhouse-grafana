@@ -58,6 +58,7 @@ export function ClickHouseDatasource(instanceSettings, $q, backendSrv, templateS
 
         _.map(options.targets, (target) => {
             if (!target.hide && target.query) {
+                options['ds_name'] = self.name
                 var queryModel = new SqlQuery(target, templateSrv, options);
                 q = queryModel.replace(options);
                 queries.push(q);

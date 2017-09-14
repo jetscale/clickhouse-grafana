@@ -79,6 +79,15 @@ System.register(["jquery", "lodash", "./query_builder", "./sql_query", "app/plug
                         return response;
                     });
                 };
+                SqlQueryCtrl.prototype.getDefaultTableSegments = function () {
+                    var target = this.target;
+                    target.tableLoading = true;
+                    this.target.database = this.datasource.name;
+                    return this.querySegment('TABLES').then(function (response) {
+                        target.tableLoading = false;
+                        return response;
+                    });
+                };
                 SqlQueryCtrl.prototype.tableChanged = function () {
                     this.target.table = this.tableSegment.value;
                     this.applySegment(this.dateColDataTypeSegment, this.fakeSegment('-- date : col --'));

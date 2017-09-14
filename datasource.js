@@ -48,6 +48,7 @@ System.register(["lodash", "./sql_series", "./sql_query", "./response_parser"], 
             var queries = [], q;
             lodash_1.default.map(options.targets, function (target) {
                 if (!target.hide && target.query) {
+                    options['ds_name'] = _this.name
                     var queryModel = new sql_query_1.default(target, templateSrv, options);
                     q = queryModel.replace(options);
                     queries.push(q);

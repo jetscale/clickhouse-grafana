@@ -24,6 +24,7 @@ export default class SqlQuery {
 
     replace(options?) {
         var query = this.target.query,
+            ds_name = options['ds_name'] || 'default',
             scanner = new Scanner(query),
             from = SqlQuery.convertTimestamp(SqlQuery.round(this.options.range.from, this.target.round)),
             to = SqlQuery.convertTimestamp(this.options.range.to),
@@ -48,7 +49,7 @@ export default class SqlQuery {
         this.target.rawQuery = query
                     .replace(/\$timeSeries/g, '(intDiv(toUInt32($dateTimeCol), $interval) * $interval) * 1000')
                     .replace(/\$timeFilter/g, timeFilter)
-                    .replace(/\$table/g, this.templateSrv.replace(this.target.database, options.scopedVars) + '.' + this.target.table)
+                    .replace(/\$table/g, ds_name + '.' + this.target.table)
                     .replace(/\$from/g, from)
                     .replace(/\$to/g, to)
                     .replace(/\$timeCol/g, this.target.dateColDataType)

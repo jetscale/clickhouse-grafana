@@ -15,8 +15,8 @@
                     <i ng-if="ctrl.target.tableLoading" class="fa fa-spinner fa-spin"></i>
                 </label>
 
-				<metric-segment segment="ctrl.databaseSegment" get-options="ctrl.getDatabaseSegments()" on-change="ctrl.databaseChanged()"></metric-segment>
-				<metric-segment segment="ctrl.tableSegment" get-options="ctrl.getTableSegments()" on-change="ctrl.tableChanged()"></metric-segment>
+				<!-- <metric-segment segment="ctrl.databaseSegment" get-options="ctrl.getDatasourceSegments()" on-change="ctrl.databaseChanged()"></metric-segment> -->
+				<metric-segment segment="ctrl.tableSegment" get-options="ctrl.getDefaultTableSegments()" on-change="ctrl.tableChanged()"></metric-segment>
 			</div>
 
 			<div class="gf-form gf-form--grow">

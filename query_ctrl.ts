@@ -60,6 +60,7 @@ class SqlQueryCtrl extends QueryCtrl {
         this.target.intervalFactor = this.target.intervalFactor || 1;
         this.target.query = this.target.query || "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t";
         this.target.formattedQuery = this.target.formattedQuery || this.target.query;
+
         this.scanner = new Scanner(this.target.query);
     }
 
@@ -80,6 +81,16 @@ class SqlQueryCtrl extends QueryCtrl {
 
     getTableSegments() {
         var target = this.target;
+        target.tableLoading = true;
+        return this.querySegment('TABLES').then(function(response){
+            target.tableLoading = false;
+            return response;
+        });
+    }
+
+    getDefaultTableSegments() {
+        var target = this.target;
+        this.target.database = this.datasource.name;
         target.tableLoading = true;
         return this.querySegment('TABLES').then(function(response){
             target.tableLoading = false;
