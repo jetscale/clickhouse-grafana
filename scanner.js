@@ -63,7 +63,8 @@ define([
       }
       var r = this.re.exec(this._s);
       if (r === null) {
-        throw("cannot find next token in [" + this._s + "]");
+        //throw("cannot find next token in [" + this._s + "]");
+        return;
       }
 
       this.token = r[0];

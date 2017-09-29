@@ -4,6 +4,7 @@ System.register(["lodash", "./sql_series", "./sql_query", "./response_parser"], 
     var __moduleName = context_1 && context_1.id;
     /** @ngInject */
     function ClickHouseDatasource(instanceSettings, $q, backendSrv, templateSrv) {
+        // templateSrv.variables[0].query = 'savingsunited';
         this.type = 'clickhouse';
         this.name = instanceSettings.name;
         this.supportMetrics = true;
@@ -83,7 +84,12 @@ System.register(["lodash", "./sql_series", "./sql_query", "./response_parser"], 
                 return { data: result };
             });
         };
+        // Jetscale - sets the database name to the datasource name
+        this.replaceDefaultDatasource = function(query) {
+            return query.replace('$database', this.name);
+        };
         this.metricFindQuery = function (query) {
+            query = this.replaceDefaultDatasource(query);
             var interpolated;
             try {
                 interpolated = templateSrv.replace(query, {}, sql_query_1.default.interpolateQueryExpr);

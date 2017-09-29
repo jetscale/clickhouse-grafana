@@ -97,8 +97,12 @@ export function ClickHouseDatasource(instanceSettings, $q, backendSrv, templateS
             return {data: result};
         });
     };
-
+    // Jetscale - sets the database name to the datasource name
+    this.replaceDefaultDatasource = function(query) {
+        return query.replace('$database', this.name);
+    };
     this.metricFindQuery = function (query) {
+        query = this.replaceDefaultDatasource(query);
         var interpolated;
         try {
             interpolated = templateSrv.replace(query, {}, SqlQuery.interpolateQueryExpr);
