@@ -48,6 +48,7 @@ System.register(['lodash', 'app/core/utils/datemath', 'moment', './scanner'], fu
                         .replace(/\$timeSeries/g, timeSeries)
                         .replace(/\$timeFilter/g, timeFilter)
                         .replace(/\$table/g, ds_name + '.' + this.target.table)
+                        .replace(/\$database/g, ds_name)
                         .replace(/\$from/g, from)
                         .replace(/\$to/g, to)
                         .replace(/\$dateCol/g, this.target.dateColDataType)
